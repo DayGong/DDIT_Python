@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+#e_id, #e_name, #gen, #addr {
+	width: 100px;
+}
+</style>
+<script src="jquery-3.7.1.js"></script>
+<script type="text/javascript">
+function myclick() {
+	var param = {
+		'menu' : '탕수육'
+	};
+	
+	$.ajax({
+		type: 'POST',
+		url: '/ajax',
+		data:JSON.stringify(param),
+		success: function(res) {
+			console.log("성공: " + res.result);
+		}
+	});	// ajax 끝
+}
+
+function fn_list() {
+	$.ajax({
+		type: 'POST',
+		url: '/select_list',
+		success: function(res) {
+			var list = res.list;
+			var html = "";
+			
+			for ( var i = 0; i < list.length; i++) {
+				var e_id = list[i].e_id;
+				var e_name = list[i].e_name;
+				var gen = list[i].gen;
+				var addr = list[i].addr;
+				
+				html += `<tr>`;
+				html += `<td><a href="javascript:fn_one(${e_id})">${e_id}</a></td>`;
+				html += `<td>${e_name}</td>`;
+				html += `<td>${gen}</td>`;
+				html += `<td>${addr}</td>`;
+				html += `</tr>`;
+			}
+			
+			$("#my_tbody").html(html);
+		}
+	});	// ajax 끝
+}
+
+function fn_one(e_id) {
+	var param = {
+		'e_id' : e_id
+	};
+	
+	$.ajax({
+		type: 'POST',
+		url: '/select_one',
+		data:JSON.stringify(param),
+		success: function(res) {
+			var vo = res.vo;
+			
+			$('#e_id').val(vo.e_id);
+			$('#e_name').val(vo.e_name);
+			$('#gen').val(vo.gen);
+			$('#addr').val(vo.addr);
+		}
+	});	// ajax 끝
+}
+
+function fn_add() {
+	var param = {
+		'e_id' : $("#e_id").val(),
+		'e_name' : $("#e_name").val(),
+		'gen' : $("#gen").val(),
+		'addr' : $("#addr").val()
+	};
+	
+	$.ajax({
+		type: 'POST',
+		url: '/insert',
+		data:JSON.stringify(param),
+		success: function(res) {
+			var cnt = res.cnt;
+			
+			if ( cnt == 1) {
+				fn_list();
+				alert("사원 추가 성공.");
+				$("#e_id").val("");
+				$("#e_name").val("");
+				$("#gen").val("");
+				$("#addr").val("");
+			} else {
+				alert("사원 추가 실패.");
+			}
+		}
+	});	// ajax 끝	
+}
+
+function fn_mod() {
+	var param = {
+		'e_id' : $("#e_id").val(),
+		'e_name' : $("#e_name").val(),
+		'gen' : $("#gen").val(),
+		'addr' : $("#addr").val()
+	};
+	
+	$.ajax({
+		type: 'POST',
+		url: '/update',
+		data:JSON.stringify(param),
+		success: function(res) {
+			var cnt = res.cnt;
+			
+			if ( cnt == 1) {
+				fn_list();
+				alert("사원 수정 성공.");
+				$("#e_id").val("");
+				$("#e_name").val("");
+				$("#gen").val("");
+				$("#addr").val("");
+			} else {
+				alert("사원 수정 실패.");
+			}
+		}
+	});	// ajax 끝	
+}
+
+function fn_del() {
+	var param = {
+		'e_id' : $("#e_id").val()
+	};
+	
+	$.ajax({
+		type: 'POST',
+		url: '/delete',
+		data:JSON.stringify(param),
+		success: function(res) {
+			var cnt = res.cnt;
+			
+			if ( cnt == 1) {
+				fn_list();
+				alert("사원 삭제 성공.");
+				$("#e_id").val("");
+				$("#e_name").val("");
+				$("#gen").val("");
+				$("#addr").val("");
+			} else {
+				alert("사원 삭제 실패.");
+			}
+		}
+	});	// ajax 끝	
+}
+
+$(document).ready(function() {
+	fn_list();
+	
+	$("#btn_add").bind("click", function(event) {
+		fn_add();
+	});
+	
+	$("#btn_mod").bind("click", function(event) {
+		fn_mod();
+	});
+	
+	$("#btn_del").bind("click", function(event) {
+		fn_del();
+	});
+});
+</script>
+</head>
+<body>
+EMP HTML <br>
+<table border="1px">
+	<thead>
+		<tr>
+			<td>사번</td>
+			<td>이름</td>
+			<td>성별</td>
+			<td>주소</td>
+		</tr>
+	</thead>
+	<tbody id="my_tbody">
+		<tr>
+			<td colspan="4">
+				선택된 데이터가 없습니다.
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<table border="1px">
+	<tr>
+		<td>사번</td>
+		<td>
+			<input type="text" id="e_id" />
+		</td>
+	</tr>
+	<tr>
+		<td>이름</td>
+		<td>
+			<input type="text" id="e_name" />
+		</td>
+	</tr>
+	<tr>
+		<td>성별</td>
+		<td>
+			<input type="text" id="gen" />
+		</td>
+	</tr>
+	<tr>
+		<td>주소</td>
+		<td>
+			<input type="text" id="addr" />
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<input type="button" value="추가" id="btn_add"/>
+			<input type="button" value="수정" id="btn_mod"/>
+			<input type="button" value="삭제" id="btn_del"/>
+		</td>
+	</tr>
+</table>
+</body>
+</html>
