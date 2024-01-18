@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>사원 정보 수정</title>
+<script type="text/javascript">
+function fn_mod_act() {
+	document.frm.submit();
+}
+</script>
+</head>
+<body>
+<form action="emp_mod_act" name="frm" method="post">
+{% csrf_token %}
+	<table border="1">
+		<tr>
+			<td>사번</td><td><input type="text" name="e_id" value="{{vo.e_id}}"/></td>
+		</tr>
+		<tr>
+			<td>이름</td><td><input type="text" name="e_name" value="{{vo.e_name}}"/></td>
+		</tr>
+		<tr>
+			<td>성별</td><td><input type="text" name="gen" value="{{vo.gen}}"/></td>
+		</tr>
+		<tr>
+			<td>주소</td><td><input type="text" name="addr" value="{{vo.addr}}"/></td>
+		</tr>
+	</table>
+	<br>
+	<input type="button" value="저장" onclick="fn_mod_act()"/>
+</form>
+</body>
+</html>

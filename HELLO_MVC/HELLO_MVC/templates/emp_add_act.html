@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>사원 등록</title>
+</head>
+<body>
+<script type="text/javascript">
+var cnt = {{cnt}};
+
+if ( cnt == 1 ) {
+		alert("사원 등록이 완료되었습니다.");
+		location.href="emp_list";
+} else {
+		alert("사원 등록을 실패하였습니다.");
+		history.back();
+}
+</script>
+</body>
+</html>

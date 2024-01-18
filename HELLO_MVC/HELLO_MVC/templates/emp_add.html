@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>사원 추가</title>
+<script>
+function fn_add_act() {
+	document.frm.submit();
+}
+</script>
+</head>
+<body>
+<form action="emp_add_act" name="frm" method="post">
+{% csrf_token %}
+	<table border="1">
+		<tr>
+			<td>사번</td><td><input type="text" name="e_id"/></td>
+		</tr>
+		<tr>
+			<td>이름</td><td><input type="text" name="e_name"/></td>
+		</tr>
+		<tr>
+			<td>성별</td><td><input type="text" name="gen"/></td>
+		</tr>
+		<tr>
+			<td>주소</td><td><input type="text" name="addr"/></td>
+		</tr>
+	</table>
+	<br>
+	<input type="button" value="저장" onclick="fn_add_act()"/>
+</form>
+</body>
+</html>
