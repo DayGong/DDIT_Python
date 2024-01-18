@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<script src="jquery-3.7.1.js"></script>
+<style type="text/css">
+body {
+	text-align: center;
+}
+
+#it {
+	text-align: right;
+	width: 100px;
+}
+</style>
+<script type="text/javascript">
+
+$(document).ready(function() {
+	$(".num").bind("click", function() {
+		myclick(this);
+	});
+	
+	$("#btn").bind("click", function() {
+		call();
+	});
+});
+
+function myclick(obj) {
+	
+	// $(obj) : $() 안에 객체를 넣으면 jQuery화 된다. 
+	var str_new = $(obj).val()
+	var old_tel = $("#it").val();
+		
+	$("#it").val(old_tel + str_new);
+}
+	
+function call() {
+	alert($("#it").val() + "\n전화겁니다~");
+}
+</script>
+</head>
+<body>
+<table border="1">
+	<tr>
+		<td colspan="3">
+			<input type="text" id="it" />
+		</td>
+	</tr>
+	<tr>
+		<td><input type="button" class="num" value="1"/></td>
+		<td><input type="button" class="num" value="2"/></td>
+		<td><input type="button" class="num" value="3"/></td>
+	</tr>
+	<tr>
+		<td><input type="button" class="num" value="4"/></td>
+		<td><input type="button" class="num" value="5"/></td>
+		<td><input type="button" class="num" value="6"/></td>
+	</tr>
+	<tr>
+		<td><input type="button" class="num" value="7"/></td>
+		<td><input type="button" class="num" value="8"/></td>
+		<td><input type="button" class="num" value="9"/></td>
+	</tr>
+	<tr>
+		<td><input type="button" class="num" value="0"/></td>
+		<td colspan="2">
+			<input type="button" id="btn" value="CALL" />
+		</td>
+	</tr>
+</table>
+</body>
+</html>

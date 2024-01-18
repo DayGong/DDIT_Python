@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>로또 생성하기</title>
+<script type="text/javascript">
+function myclick() {
+	var objs_span = document.getElementsByClassName("my_span");
+	
+	var arr = [];
+	for (var i = 1; i <= 45; i++) {
+		arr[i-1] = i; 
+	}
+	
+	for (var i = 0; i <= 10000; i++) {
+		var rnd = parseInt(Math.random()*45);
+		var tmp = arr[0];
+		arr[0] = arr[rnd];
+		arr[rnd] = tmp;
+	}
+	
+	for (var i = 0; i < 6; i++) {
+		for (var j = 0; j < 6; j++) {
+			if (arr[i] < arr[j]) {
+				var a = arr[i];
+				var b = arr[j];
+				arr[i] = b;
+				arr[j] = a;
+			}
+		}
+	}
+	
+	objs_span[0].innerHTML = arr[0];
+	objs_span[1].innerHTML = arr[1];
+	objs_span[2].innerHTML = arr[2];
+	objs_span[3].innerHTML = arr[3];
+	objs_span[4].innerHTML = arr[4];
+	objs_span[5].innerHTML = arr[5];
+}
+</script>
+</head>
+<body>
+<table border="1">
+	<tr>
+		<td><span class="my_span">__</span></td>
+		<td><span class="my_span">__</span></td>
+		<td><span class="my_span">__</span></td>
+		<td><span class="my_span">__</span></td>
+		<td><span class="my_span">__</span></td>
+		<td><span class="my_span">__</span></td>
+	</tr>
+	<tr>
+		<td colspan="6">
+			<input type="button" value="로또생성하기" onclick="myclick()"/>
+		</td>
+	</tr>
+</table>
+</body>
+</html>

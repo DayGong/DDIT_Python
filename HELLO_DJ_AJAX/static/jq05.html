@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>별 출력</title>
+<script src="jquery-3.7.1.js"></script>
+<style type="text/css">
+#it_first, #it_last {
+	width: 40px;
+}
+
+#my_div {
+	height: 200px;
+}
+</style>
+<script type="text/javascript">
+$(function() {
+	$("#btn").bind("click", function() {
+		myclick();
+	});
+});
+
+function myclick() {
+	var i_fst = parseInt($("#it_first").val());
+	var i_last = parseInt($("#it_last").val());
+	
+	var result = "";
+	for (var i = i_fst; i < (i_last+1); i++) {
+		result += getStar(i);
+	}
+	
+	$("#my_div").html(result);
+	
+}
+
+function getStar(num) {
+	var res = "";
+	
+	for (var i = 0; i < num; i++) {
+		res += "*";
+	}
+	res += "<br/>";
+	
+	return res;
+}
+</script>
+</head>
+<body>
+<table border="1">
+	<tr>
+		<td>첫별수</td>
+		<td>
+			<input type="text" id="it_first" />
+		</td>
+	</tr>
+	<tr>
+		<td>끝별수</td>
+		<td>
+			<input type="text" id="it_last" />
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<input type="button" id="btn" value="별출력하기" />
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<div id="my_div"></div>
+		</td>
+	</tr>
+</table>
+</body>
+</html>

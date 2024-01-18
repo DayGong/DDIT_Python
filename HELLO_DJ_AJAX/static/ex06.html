@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style type="text/css">
+body {
+	text-align: center;
+}
+
+#it {
+	text-align: right;
+	width: 100px;
+}
+</style>
+<script type="text/javascript">
+	function myclick(obj) {
+		var obj_it = document.getElementById("it")
+		var obj_num = obj.value;
+		
+		var old_tel = obj_it.value;
+		
+		obj_it.value = old_tel + obj_num;
+	}
+	
+	function call() {
+		var tel = document.getElementById("it").value;
+		
+		alert(tel + "\n전화겁니다~");
+	}
+</script>
+</head>
+<body>
+<table border="1">
+	<tr>
+		<td colspan="3">
+			<input type="text" id="it" />
+		</td>
+	</tr>
+	<tr>
+		<td><input type="button" class="num" value="1" onclick="myclick(this)"/></td>
+		<td><input type="button" class="num" value="2" onclick="myclick(this)"/></td>
+		<td><input type="button" class="num" value="3" onclick="myclick(this)"/></td>
+	</tr>
+	<tr>
+		<td><input type="button" class="num" value="4" onclick="myclick(this)"/></td>
+		<td><input type="button" class="num" value="5" onclick="myclick(this)"/></td>
+		<td><input type="button" class="num" value="6" onclick="myclick(this)"/></td>
+	</tr>
+	<tr>
+		<td><input type="button" class="num" value="7" onclick="myclick(this)"/></td>
+		<td><input type="button" class="num" value="8" onclick="myclick(this)"/></td>
+		<td><input type="button" class="num" value="9" onclick="myclick(this)"/></td>
+	</tr>
+	<tr>
+		<td><input type="button" class="num" value="0" onclick="myclick(this)"/></td>
+		<td colspan="2">
+			<input type="button" value="CALL" onclick="call()"/>
+		</td>
+	</tr>
+</table>
+</body>
+</html>

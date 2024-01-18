@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style type="text/css">
+#it_first, #it_last {
+	width: 40px;
+}
+
+#my_div {
+	height: 200px;
+}
+</style>
+<script type="text/javascript">
+function myclick() {
+	var obj_fst = document.getElementById("it_first");
+	var obj_last = document.getElementById("it_last");
+	var obj_div = document.getElementById("my_div");
+	
+	var i_fst = parseInt(obj_fst.value);
+	var i_last = parseInt(obj_last.value);
+	
+	var result = "";
+	for (var i = i_fst; i < (i_last+1); i++) {
+		result += getStar(i);
+	}
+	
+	obj_div.innerHTML = result;
+	
+}
+
+function getStar(num) {
+	var res = "";
+	
+	for (var i = 0; i < num; i++) {
+		res += "*";
+	}
+	res += "<br/>";
+	
+	return res;
+}
+</script>
+</head>
+<body>
+<table border="1">
+	<tr>
+		<td>첫별수</td>
+		<td>
+			<input type="text" id="it_first" />
+		</td>
+	</tr>
+	<tr>
+		<td>끝별수</td>
+		<td>
+			<input type="text" id="it_last" />
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<input type="button" value="별출력하기" onclick="myclick()"/>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<div id="my_div"></div>
+		</td>
+	</tr>
+</table>
+</body>
+</html>

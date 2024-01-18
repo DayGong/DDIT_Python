@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>로또 생성하기</title>
+<script src="jquery-3.7.1.js"></script>
+<script type="text/javascript">
+$(function() {
+	$("#btn").bind("click", function() {
+		myclick();
+	});
+});
+
+function myclick() {
+	var arr = [];
+	for (var i = 1; i <= 45; i++) {
+		arr[i-1] = i; 
+	}
+	
+	for (var i = 0; i <= 10000; i++) {
+		var rnd = parseInt(Math.random()*45);
+		var tmp = arr[0];
+		arr[0] = arr[rnd];
+		arr[rnd] = tmp;
+	}
+	
+	for (var i = 0; i < 6; i++) {
+		for (var j = 0; j < 6; j++) {
+			if (arr[i] < arr[j]) {
+				var a = arr[i];
+				var b = arr[j];
+				arr[i] = b;
+				arr[j] = a;
+			}
+		}
+	}
+	
+	$(".my_span").eq(0).html(arr[0]);
+	$(".my_span").eq(1).html(arr[1]);
+	$(".my_span").eq(2).html(arr[2]);
+	$(".my_span").eq(3).html(arr[3]);
+	$(".my_span").eq(4).html(arr[4]);
+	$(".my_span").eq(5).html(arr[5]);
+}
+</script>
+</head>
+<body>
+<table border="1">
+	<tr>
+		<td><span class="my_span">__</span></td>
+		<td><span class="my_span">__</span></td>
+		<td><span class="my_span">__</span></td>
+		<td><span class="my_span">__</span></td>
+		<td><span class="my_span">__</span></td>
+		<td><span class="my_span">__</span></td>
+	</tr>
+	<tr>
+		<td colspan="6">
+			<input type="button" id="btn" value="로또생성하기" />
+		</td>
+	</tr>
+</table>
+</body>
+</html>
