@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>회원 상세보기</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript">
+function fn_mod() {
+	location.href = "mem_mod?mem_id={{vo.mem_id}}";
+}
+
+function fn_del_act() {
+	var flag = confirm("이 데이터를 지우면 다시 복구할 수 없습니다.")
+
+	if ( !flag ) {
+		return	
+	}
+	
+	document.frm.submit();
+}
+
+$(function() {
+	$("#btn_mod").bind('click', function() {
+		fn_mod();
+	});
+	
+	$("#btn_del").bind('click', function() {
+		fn_del_act();
+	});
+});
+</script>
+</head>
+<body>
+<h1>회원 상세보기</h1>
+<form action="mem_del_act" name="frm" method="post">
+	<input type="hidden" name="mem_id" value="{{vo.mem_id}}">
+</form>
+<table border="1">
+	<tr>
+		<td>사번</td>
+		<td>{{vo.mem_id}}</td>
+	</tr>
+	<tr>
+		<td>이름</td>
+		<td>{{vo.mem_name}}</td>
+	</tr>
+	<tr>
+		<td>전화</td>
+		<td>{{vo.tel}}</td>
+	</tr>
+	<tr>
+		<td>이메일</td>
+		<td>{{vo.email}}</td>
+	</tr>
+</table>
+<br/>
+<input type="button" id="btn_mod" value="수정" />
+<input type="button" id="btn_del" value="삭제" />
+</body>
+</html>

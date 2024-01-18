@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+function fn_axios() {
+	var param = {
+		menu : '간짜장'
+	}
+	axios.post('/axios', param)
+	.then((res) => {
+		console.log(res.data.menu)
+	});
+}
+</script>
+</head>
+<body>
+<a href="javascript:fn_axios()">axios</a>
+</body>
+</html>

@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript">
+function fn_add() {
+	location.href = "mem_add";
+}
+
+$(function() {
+	$("#btn").bind('click', function() {
+		fn_add();
+	});
+});
+</script>
+</head>
+<body>
+<h1>멤버 리스트</h1>
+<table border="1">
+	<tr>
+		<td>사번</td>
+		<td>이름</td>
+		<td>전화</td>
+		<td>이메일</td>
+	</tr>
+	{% for m in list %}
+		<tr>
+			<td>
+				<a href="mem_detail?mem_id={{m.mem_id}}">{{m.mem_id}}</a>
+			</td>
+			<td>{{m.mem_name}}</td>
+			<td>{{m.tel}}</td>
+			<td>{{m.email}}</td>
+		</tr>
+	{% endfor %}
+</table>
+<br/>
+<input type="button" id="btn" value="추가" />
+</body>
+</html>

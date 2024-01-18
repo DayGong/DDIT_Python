@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ajax</title>
+<script src="jquery-3.7.1.js"></script>
+<script type="text/javascript">
+function myclick() {
+	var param = {
+		'menu' : '탕수육'
+	};
+	
+	$.ajax({
+		type: 'POST',
+		url: '/ajax',
+		//data:JSON.stringify(param),
+		data: param,
+		success: function(res) {
+			console.log("성공: " + res.menu);
+		}
+	});	// ajax 끝
+}
+
+function myclick2() {
+	var param = {
+		'menu' : '볶음짬뽕'
+	};
+	
+	$.ajax({
+		type: 'POST',
+		url: '/ajax2',
+		data:JSON.stringify(param),
+		//data: param,
+		success: function(res) {
+			console.log("성공: " + res.menu);
+		}
+	});	// ajax 끝
+}
+
+
+</script>
+</head>
+<body>
+<a href="javascript:myclick2()">ajax</a>
+</body>
+</html>

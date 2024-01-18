@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+function fn_fetch() {
+	fetch('/fetch_bm', {
+		method:'POST',
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body:JSON.stringify({
+			menu:'이비가짬뽕'
+		})
+	})
+	.then((response) =>
+		response.json()
+	).then((data) =>
+		console.log(data)
+	)
+}
+
+function fn_list() {
+	fetch('/mem_list', {
+		method:'POST',
+		headers: {	"Content-Type": "application/json",	}
+	})
+	.then((response) =>	response.json()	)
+	.then((res) => 
+		cb_list(res.list)
+	)
+}
+
+function cb_list(list) {
+	var obj = document.getElementById("my_tbody");
+	
+	var html = ``;
+	for ( var i = 0; i < list.length; i++) {
+		var vo = list[i];
+		
+		html += `
+		<tr>
+			<td><a href="javascript:fn_one('${vo.mem_id}')">${vo.mem_id}</a></td>
+			<td>${vo.mem_name}</td>
+			<td>${vo.tel}</td>
+			<td>${vo.email}</td>
+		</tr>
+		`;
+	}
+	
+	obj.innerHTML = html;
+}
+
+function fn_one(mem_id) {
+	fetch('/mem_select', {
+		method:'POST',
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body:JSON.stringify({
+			mem_id: mem_id
+		})
+	})
+	.then((response) =>
+		response.json()
+	).then((res) => 
+		cb_one(res.vo)
+	)
+}
+
+function cb_one(vo) {
+	document.getElementById("mem_id").value = vo.mem_id;
+	document.getElementById("mem_name").value = vo.mem_name;
+	document.getElementById("tel").value = vo.tel;
+	document.getElementById("email").value = vo.email;
+}
+
+function fn_add() {
+	var params = {
+		mem_id: document.getElementById("mem_id").value,
+		mem_name: document.getElementById("mem_name").value,
+		tel: document.getElementById("tel").value,
+		email: document.getElementById("email").value
+	};
+	
+	fetch('/mem_add', {
+		method:'POST',
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body:JSON.stringify(params)
+	})
+	.then((response) =>
+		response.json()
+	).then((res) => 
+		cb_add(res.cnt)
+	)
+}
+
+function cb_add(cnt) {
+	if ( cnt == 1 ) {
+		alert("추가 성공");
+		fn_list();
+		clear();
+	} else {
+		alert("추가 실패");
+	}
+}
+
+function fn_mod() {
+	var params = {
+		mem_id: document.getElementById("mem_id").value,
+		mem_name: document.getElementById("mem_name").value,
+		tel: document.getElementById("tel").value,
+		email: document.getElementById("email").value
+	};
+	
+	fetch('/mem_mod', {
+		method:'POST',
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body:JSON.stringify(params)
+	})
+	.then((response) =>
+		response.json()
+	).then((res) =>
+		cb_mod(res.cnt)
+	)
+}
+
+function cb_mod(cnt) {
+	if ( cnt == 1 ) {
+		alert("수정 성공");
+		fn_list();
+		clear();
+	} else {
+		alert("수정 실패");
+	}
+}
+
+function fn_del() {
+	fetch('/mem_del', {
+		method:'POST',
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body:JSON.stringify({
+			mem_id: document.getElementById("mem_id").value
+		})
+	})
+	.then((response) =>
+		response.json()
+	).then((res) => 
+		cb_del(res.cnt)
+	)
+}
+
+function cb_del(cnt) {
+	if ( cnt == 1 ) {
+		alert("삭제 성공");
+		fn_list();
+		clear();
+	} else {
+		alert("삭제 실패");
+	}
+}
+
+function clear() {
+	document.getElementById("mem_id").value = "";
+	document.getElementById("mem_name").value = "";
+	document.getElementById("tel").value = "";
+	document.getElementById("email").value = "";
+}
+
+window.onload = function() {
+	fn_list()
+}
+</script>
+</head>
+<body>
+<table border="1px">
+	<thead>
+		<tr>
+			<td>사번</td>
+			<td>이름</td>
+			<td>전화</td>
+			<td>메일</td>
+		</tr>
+	</thead>
+	<tbody id="my_tbody">
+		<tr>
+			<td colspan="4">검색된 데이터가 없습니다.</td>
+		</tr>
+	</tbody>
+</table>
+
+<table border="1px">
+	<tr>
+		<td>사번</td>
+		<td>
+			<input type="text" id="mem_id" />
+		</td>
+	</tr>
+	<tr>
+		<td>이름</td>
+		<td>
+			<input type="text" id="mem_name" />
+		</td>
+	</tr>
+	<tr>
+		<td>전화</td>
+		<td>
+			<input type="text" id="tel" />
+		</td>
+	</tr>
+	<tr>
+		<td>메일</td>
+		<td>
+			<input type="text" id="email" />
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<input type="button" value="추가" onclick="fn_add()"/>
+			<input type="button" value="수정" onclick="fn_mod()"/>
+			<input type="button" value="삭제" onclick="fn_del()"/>
+		</td>
+	</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+const option ={
+	method:'POST',
+	body:JSON.stringify({
+		menu:'다온짬뽕'
+	})
+}
+
+function fn_fetch() {
+	fetch('/fetch', option)
+	.then( response =>
+		response.json().then(res =>
+			console.log(res.menu)
+		)
+	)
+}
+</script>
+</head>
+<body>
+<a href="javascript:fn_fetch()">fetch</a>
+</body>
+</html>

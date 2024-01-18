@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>회원 정보 수정</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript">
+function fn_mod_act() {
+	document.frm.submit();
+}
+
+$(function() {
+	$("#btn_mod_act").bind('click', function() {
+		fn_mod_act();
+	});
+});
+</script>
+</head>
+<body>
+<h1>회원 정보 수정</h1>
+<form action="mem_mod_act" name="frm" method="post">
+	<table border="1">
+		<tr>
+			<td>사번</td>
+			<td>
+				<input type="text" name="mem_id" value="{{vo.mem_id}}" />
+			</td>
+		</tr>
+		<tr>
+			<td>이름</td>
+			<td>
+				<input type="text" name="mem_name" value="{{vo.mem_name}}" />
+			</td>
+		</tr>
+		<tr>
+			<td>전화</td>
+			<td>
+				<input type="text" name="tel" value="{{vo.tel}}" />
+			</td>
+		</tr>
+		<tr>
+			<td>이메일</td>
+			<td>
+				<input type="text" name="email" value="{{vo.email}}" />
+			</td>
+		</tr>
+	</table>
+</form>
+<br/>
+<input type="button" id="btn_mod_act" value="저장" />
+</body>
+</html>

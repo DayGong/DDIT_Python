@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>사원 추가</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript">
+function fn_add_act() {
+	document.frm.submit();
+}
+
+$(function() {
+	$("#btn_add_act").bind('click', function() {
+		fn_add_act();
+	});
+});
+</script>
+</head>
+<body>
+<form action="mem_add_act" name="frm" method="post">
+	<table border="1">
+		<tr>
+			<td>사번</td><td><input type="text" name="mem_id"/></td>
+		</tr>
+		<tr>
+			<td>이름</td><td><input type="text" name="mem_name"/></td>
+		</tr>
+		<tr>
+			<td>전화</td><td><input type="text" name="tel"/></td>
+		</tr>
+		<tr>
+			<td>이메일</td><td><input type="text" name="email"/></td>
+		</tr>
+	</table>
+	<br>
+	<input type="button" id="btn_add_act" value="저장"/>
+</form>
+</body>
+</html>
